@@ -8,7 +8,6 @@ public class Main {
         GamePanel gamePanel = new GamePanel();
         gameWindow.add(gamePanel);
         //Hello
-
         SwingUtilities.invokeLater(() -> {
 
             gameWindow.setVisible(true);

@@ -7,6 +7,7 @@ public class Main {
         GameWindow gameWindow = new GameWindow();
         GamePanel gamePanel = new GamePanel();
         gameWindow.add(gamePanel);
+        //Hello
 
         SwingUtilities.invokeLater(() -> {
 

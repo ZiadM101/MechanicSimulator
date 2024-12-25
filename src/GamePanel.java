@@ -17,7 +17,7 @@ public class GamePanel extends JPanel implements Runnable {
     //FPS
 
 
-    public final int FPS = 144;
+    public final int FPS = 60;
     //Default Player position
 
 

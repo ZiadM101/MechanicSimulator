@@ -45,6 +45,11 @@ public class Player extends Entity {
         else if (keyHandler.rightPressed) {
             x += speed;
         }
+        spriteCounter++;
+        if (spriteCounter > 20) {
+            spriteNumber = (spriteNumber + 1) % 2;
+            spriteCounter = 0;
+        }
     }
 
     public void draw(Graphics2D  g2) {
@@ -54,13 +59,21 @@ public class Player extends Entity {
 
         BufferedImage image = null;
 
-        image = resting;
+        if (spriteNumber == 0) {
+            image = resting1;
+        }
+        else {
+            image = resting2;
+
+        }
+
         g2.drawImage(image, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
     }
 
     public void getPlayerImage() {
         try {
-            resting = ImageIO.read(getClass().getResourceAsStream("/player/playerResting.png"));
+            resting1 = ImageIO.read(getClass().getResourceAsStream("/player/playerResting.png"));
+            resting2 = ImageIO.read(getClass().getResourceAsStream("/player/playerResting2.png"));
         } catch (IOException e) {
             e.printStackTrace();
 

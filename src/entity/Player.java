@@ -9,8 +9,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Player extends Entity {
-
-    GamePanel gamePanel;
     KeyHandler keyHandler;
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
@@ -31,20 +29,24 @@ public class Player extends Entity {
         direction = "resting";
     }
 
-    public void update() {
+    public void update() { // Update player position
         if (keyHandler.upPressed) {
+            direction = "up";
             if (y - speed >= 0) { // Prevent moving above the top border
                 y -= speed;
             }
         } else if (keyHandler.downPressed) {
+            direction = "down";
             if (y + speed + gamePanel.tileSize <= gamePanel.screenHeight) { // Prevent moving below the bottom border
                 y += speed;
             }
         } else if (keyHandler.leftPressed) {
+            direction = "left";
             if (x - speed >= 0) { // Prevent moving left past the left border
                 x -= speed;
             }
         } else if (keyHandler.rightPressed) {
+            direction = "right";
             if (x + speed + gamePanel.tileSize <= gamePanel.screenWidth) { // Prevent moving right past the right border
                 x += speed;
             }
@@ -56,27 +58,38 @@ public class Player extends Entity {
         }
     }
     public void draw(Graphics2D  g2) {
-//        g2.setColor(Color.WHITE);
-//
-//        g2.fillRect(x, y, gamePanel.tileSize, gamePanel.tileSize);
+        BufferedImage image;
 
-        BufferedImage image = null;
+        if (direction.equals("up")) {
+            if (spriteNumber == 0) {
+                image = up1;
+            }
+            else {
+                image = up2;
 
-        if (spriteNumber == 0) {
-            image = resting1;
+            }
         }
+
         else {
-            image = resting2;
+            if (spriteNumber == 0) {
+                image = down1;
+            }
+            else {
+                image = down2;
 
+            }
         }
+
 
         g2.drawImage(image, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
     }
 
     public void getPlayerImage() {
         try {
-            resting1 = ImageIO.read(getClass().getResourceAsStream("/player/playerResting.png"));
-            resting2 = ImageIO.read(getClass().getResourceAsStream("/player/playerResting2.png"));
+            down1 = ImageIO.read(getClass().getResourceAsStream("/player/playerResting1.png"));
+            down2 = ImageIO.read(getClass().getResourceAsStream("/player/playerResting2.png"));
+            up1 = ImageIO.read(getClass().getResourceAsStream("/player/playerUp1.png"));
+            up2 = ImageIO.read(getClass().getResourceAsStream("/player/playerUp2.png"));
         } catch (IOException e) {
             e.printStackTrace();
 

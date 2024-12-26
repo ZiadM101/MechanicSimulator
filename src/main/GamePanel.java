@@ -28,7 +28,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int FPS = 60;
     //Default Player position
 
-    
+
     public GamePanel() {
 
         setPreferredSize(new Dimension(screenWidth, screenHeight));

@@ -1,7 +1,7 @@
 package main;
 
 import entity.Player;
-import layout.Tilemanager;
+import layout.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +22,7 @@ public class GamePanel extends JPanel implements Runnable {
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread;
     Player player = new Player(this, keyHandler);
-    Tilemanager tilemanager = new Tilemanager(this);
+    TileManager tilemanager = new TileManager(this);
 
     //FPS
 

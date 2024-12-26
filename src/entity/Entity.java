@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Entity {
     public int x, y;
-    public int speed;
+    public int speed, tempSpeed;
     public BufferedImage down1, down2, down3, down4, down5, down6, down7, down8, down9;
 
     public BufferedImage up1, up2, up3, up4, up5, up6, up7, up8, up9;
@@ -56,8 +56,8 @@ public class Entity {
 
     public void eightFrameSpriteIncrement() {
         spriteCounter++;
-        if (spriteCounter > 7) {
-            spriteNumber = (spriteNumber + 1) % 9;
+        if (spriteCounter > 3) {
+            spriteNumber = (spriteNumber + 1) % 8;
             spriteCounter = 0;
         }
     }
@@ -77,7 +77,6 @@ public class Entity {
             case 5 -> spriteList.get(5);
             case 6 -> spriteList.get(6);
             case 7 -> spriteList.get(7);
-            case 8 -> spriteList.get(8);
             default -> stillSprite;
         };
 

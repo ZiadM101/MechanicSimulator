@@ -32,26 +32,38 @@ public class Player extends Entity  {
 
             if (keyHandler.upPressed && keyHandler.leftPressed) {
                 direction = "up";
+                tempSpeed = speed;
+                speed = (int) (speed * 0.75);
                 moveUpBordered();
                 moveLeftBordered();
+                speed = tempSpeed;
             }
 
             else if (keyHandler.upPressed && keyHandler.rightPressed) {
                 direction = "up";
+                tempSpeed = speed;
+                speed = (int) (speed * 0.75);
                 moveRightBordered();
                 moveUpBordered();
+                speed = tempSpeed;
             }
 
             else if (keyHandler.downPressed && keyHandler.leftPressed) {
                 direction = "down";
+                tempSpeed = speed;
+                speed = (int) (speed * 0.75);
                 moveLeftBordered();
                 moveDownBordered();
+                speed = tempSpeed;
             }
 
             else if (keyHandler.downPressed && keyHandler.rightPressed) {
                 direction = "down";
+                tempSpeed = speed;
+                speed = (int) (speed * 0.75);
                 moveDownBordered();
                 moveRightBordered();
+                speed = tempSpeed;
             }
             else if (keyHandler.upPressed) {
                 direction = "up";
@@ -82,7 +94,7 @@ public class Player extends Entity  {
             case "up" -> image = changeSpritePicture(up1, upList);
             case "right" -> image =changeSpritePicture(right1, rightList);
             case "left" -> image =changeSpritePicture(left1, leftList);
-            default -> image =changeSpritePicture(down1, downList);
+            default -> image =changeSpritePicture(down1, downList);//down
 
 
         }
@@ -91,8 +103,7 @@ public class Player extends Entity  {
     public void getPlayerImage() {
         try {
             down1 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown1.png"));
-            down6 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown6.png"));
-            downList.add(down6);
+
             down2 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown2.png"));
             downList.add(down2);
             down3 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown3.png"));
@@ -101,7 +112,9 @@ public class Player extends Entity  {
             downList.add(down4);
             down5 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown5.png"));
             downList.add(down5);
+            down6 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown6.png"));
             downList.add(down6);
+
             down7 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown7.png"));
             downList.add(down7);
             down8 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown8.png"));
@@ -109,8 +122,7 @@ public class Player extends Entity  {
             down9 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown9.png"));
             downList.add(down9);
             up1 = ImageIO.read(getClass().getResourceAsStream("/player/playerUp1.png"));
-            up6 = ImageIO.read(getClass().getResourceAsStream("/player/playerUp6.png"));
-            upList.add(up6);
+
             up2 = ImageIO.read(getClass().getResourceAsStream("/player/playerUp2.png"));
             upList.add(up2);
             up3 = ImageIO.read(getClass().getResourceAsStream("/player/playerUp3.png"));
@@ -119,6 +131,7 @@ public class Player extends Entity  {
             upList.add(up4);
             up5 = ImageIO.read(getClass().getResourceAsStream("/player/playerUp5.png"));
             upList.add(up5);
+            up6 = ImageIO.read(getClass().getResourceAsStream("/player/playerUp6.png"));
             upList.add(up6);
             up7 = ImageIO.read(getClass().getResourceAsStream("/player/playerUp7.png"));
             upList.add(up7);

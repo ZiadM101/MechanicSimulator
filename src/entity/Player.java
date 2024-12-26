@@ -58,7 +58,7 @@ public class Player extends Entity {
         }
     }
     public void draw(Graphics2D  g2) {
-        BufferedImage image;
+        BufferedImage image = null;
 
         if (direction.equals("up")) {
             if (spriteNumber == 0) {
@@ -66,6 +66,26 @@ public class Player extends Entity {
             }
             else {
                 image = up2;
+
+            }
+        }
+
+        else if (direction.equals("right")) {
+            if (spriteNumber == 0) {
+                image = right1;
+            }
+            else {
+                image = right2;
+
+            }
+        }
+
+        else if (direction.equals("left")) {
+            if (spriteNumber == 0) {
+                image = left1;
+            }
+            else {
+                image = left2;
 
             }
         }
@@ -90,6 +110,10 @@ public class Player extends Entity {
             down2 = ImageIO.read(getClass().getResourceAsStream("/player/playerResting2.png"));
             up1 = ImageIO.read(getClass().getResourceAsStream("/player/playerUp1.png"));
             up2 = ImageIO.read(getClass().getResourceAsStream("/player/playerUp2.png"));
+            left1 = ImageIO.read(getClass().getResourceAsStream("/player/playerLeft1.png"));
+            left2 = ImageIO.read(getClass().getResourceAsStream("/player/playerLeft2.png"));
+            right1 = ImageIO.read(getClass().getResourceAsStream("/player/playerRight1.png"));
+            right2 = ImageIO.read(getClass().getResourceAsStream("/player/playerRight2.png"));
         } catch (IOException e) {
             e.printStackTrace();
 

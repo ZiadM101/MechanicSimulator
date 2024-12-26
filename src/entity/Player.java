@@ -33,20 +33,23 @@ public class Player extends Entity {
 
     public void update() {
         if (keyHandler.upPressed) {
-            y -= speed;
-        }
-
-        else if (keyHandler.downPressed) {
-            y += speed;
-        }
-        else if (keyHandler.leftPressed) {
-            x -= speed;
-        }
-        else if (keyHandler.rightPressed) {
-            x += speed;
+            if (y - speed >= 0) { // Prevent moving above the top border
+                y -= speed;
+            }
+        } else if (keyHandler.downPressed) {
+            if (y + speed + gamePanel.tileSize <= gamePanel.screenHeight) { // Prevent moving below the bottom border
+                y += speed;
+            }
+        } else if (keyHandler.leftPressed) {
+            if (x - speed >= 0) { // Prevent moving left past the left border
+                x -= speed;
+            }
+        } else if (keyHandler.rightPressed) {
+            if (x + speed + gamePanel.tileSize <= gamePanel.screenWidth) { // Prevent moving right past the right border
+                x += speed;
+            }
         }
     }
-
     public void draw(Graphics2D  g2) {
 //        g2.setColor(Color.WHITE);
 //

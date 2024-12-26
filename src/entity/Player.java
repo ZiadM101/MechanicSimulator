@@ -32,7 +32,47 @@ public class Player extends Entity {
     public void update() { // Update player position
 
         if (keyHandler.downPressed || keyHandler.leftPressed || keyHandler.rightPressed || keyHandler.upPressed) {
-            if (keyHandler.upPressed) {
+
+            if (keyHandler.upPressed && keyHandler.leftPressed) {
+                direction = "up";
+                if (y - speed >= 0) { // Prevent moving above the top border
+                    y -= speed;
+                }
+                if (x - speed >= 0) { // Prevent moving left past the left border
+                    x -= speed;
+                }
+            }
+
+            else if (keyHandler.upPressed && keyHandler.rightPressed) {
+                direction = "up";
+                if (y - speed >= 0) { // Prevent moving above the top border
+                    y -= speed;
+                }
+                if (x + speed + gamePanel.tileSize <= gamePanel.screenWidth) { // Prevent moving right past the right border
+                    x += speed;
+                }
+            }
+
+            else if (keyHandler.downPressed && keyHandler.leftPressed) {
+                direction = "down";
+                if (y + speed + gamePanel.tileSize <= gamePanel.screenHeight) { // Prevent moving below the bottom border
+                    y += speed;
+                }
+                if (x - speed >= 0) { // Prevent moving left past the left border
+                    x -= speed;
+                }
+            }
+
+            else if (keyHandler.downPressed && keyHandler.rightPressed) {
+                direction = "down";
+                if (y + speed + gamePanel.tileSize <= gamePanel.screenHeight) { // Prevent moving below the bottom border
+                    y += speed;
+                }
+                if (x + speed + gamePanel.tileSize <= gamePanel.screenWidth) { // Prevent moving right past the right border
+                    x += speed;
+                }
+            }
+            else if (keyHandler.upPressed) {
                 direction = "up";
                 if (y - speed >= 0) { // Prevent moving above the top border
                     y -= speed;

@@ -3,6 +3,7 @@ package entity;
 import main.GamePanel;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Entity {
     public int x, y;
@@ -18,4 +19,70 @@ public class Entity {
     public int spriteCounter =0;
     public int spriteNumber =0;
     GamePanel gamePanel;
+
+
+    public void setDefaultValues(int x, int y, int speed, String direction) {
+
+        //Default values (where the player will initially appear on the screen)
+        this.x = x;
+        this.y = y;
+        this.speed = speed;
+        this.direction = direction;
+    }
+
+    public void moveLeftBordered() {
+        if (x - speed >= 0) { // Prevent moving left past the left border
+            x -= speed;
+        }
+    }
+
+    public void moveRightBordered() {
+        if (x + speed + gamePanel.tileSize <= gamePanel.screenWidth) { // Prevent moving right past the right border
+            x += speed;
+        }
+    }
+
+    public void moveUpBordered() {
+        if (y - speed >= 0) { // Prevent moving above the top border
+            y -= speed;
+        }
+    }
+
+    public void moveDownBordered() {
+        if (y + speed + gamePanel.tileSize <= gamePanel.screenHeight) { // Prevent moving below the bottom border
+            y += speed;
+        }
+    }
+
+    public void eightFrameSpriteIncrement() {
+        spriteCounter++;
+        if (spriteCounter > 7) {
+            spriteNumber = (spriteNumber + 1) % 9;
+            spriteCounter = 0;
+        }
+    }
+
+    public void stillSprite() {
+        spriteNumber = -1;
+    }
+
+    public BufferedImage changeSpritePicture(BufferedImage stillSprite, ArrayList<BufferedImage> spriteList) {
+
+        return switch (spriteNumber) {
+            case 0 -> spriteList.get(0);
+            case 1 -> spriteList.get(1);
+            case 2 -> spriteList.get(2);
+            case 3 -> spriteList.get(3);
+            case 4 -> spriteList.get(4);
+            case 5 -> spriteList.get(5);
+            case 6 -> spriteList.get(6);
+            case 7 -> spriteList.get(7);
+            case 8 -> spriteList.get(8);
+            default -> stillSprite;
+        };
+
+
+
+    }
+
 }

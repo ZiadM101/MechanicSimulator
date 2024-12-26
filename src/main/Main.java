@@ -1,5 +1,4 @@
-package main;//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+package main;
 import javax.swing.SwingUtilities;
 
 public class Main {
@@ -7,17 +6,12 @@ public class Main {
         GameWindow gameWindow = new GameWindow();
         GamePanel gamePanel = new GamePanel();
         gameWindow.add(gamePanel);
-        //Hello
+
         SwingUtilities.invokeLater(() -> {
 
             gameWindow.setVisible(true);
         });
 
         gamePanel.startGameThread();
-
-
-        //TestEdit
-        //Test2Branch
-        
     }
 }

@@ -8,13 +8,13 @@ import java.awt.*;
 public class GamePanel extends JPanel implements Runnable {
 
     //Initialize tile size values and how many tiles are the screen at one time
-    public final int originalTileBase = 64; // 32 * 32 pixels for each tile (graphic)
-    public final double tileScale = 0.75; // Graphic will be scaled by 1.5 to fit screen
+    public final int originalTileBase = 64; // 64 * 64 pixels for each tile (graphic)
+    public final double tileScale = 0.75; // Graphic will be scaled by 0.75 // to fit screen
     public final int tileSize = (int) (originalTileBase * tileScale); // The full tile size will be 48 * 48 pixels
     public final int maxScreenCol = 40; // 16 columns of tiles
     public final float maxScreenRow = 22.5f; // 12 rows of tiles
-    public final int screenWidth = (int) tileSize * maxScreenCol; // How many columns of pixels = 768
-    public final int screenHeight = (int) (tileSize * maxScreenRow); // How many rows of pixels = 576
+    public final int screenWidth = (int) tileSize * maxScreenCol; // How many columns of pixels = 1920
+    public final int screenHeight = (int) (tileSize * maxScreenRow); // How many rows of pixels = 1080
 
 
     //Create key handler, thread, and player objects
@@ -23,11 +23,7 @@ public class GamePanel extends JPanel implements Runnable {
     Player player = new Player(this, keyHandler);
 
     //FPS
-
-
     public final int FPS = 60;
-    //Default Player position
-
 
     public GamePanel() {
 
@@ -50,7 +46,6 @@ public class GamePanel extends JPanel implements Runnable {
 
         while(gameThread.isAlive()) {
             player.update();
-
 
             repaint();
 

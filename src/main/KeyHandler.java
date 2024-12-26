@@ -33,8 +33,6 @@ public class KeyHandler implements KeyListener {
             rightPressed = true;
         }
 
-
-
     }
 
     @Override

@@ -7,27 +7,24 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
-public class Player extends Entity {
+public class Player extends Entity  {
     KeyHandler keyHandler;
+    ArrayList<BufferedImage> upList = new ArrayList<>();
+    ArrayList<BufferedImage> leftList = new ArrayList<>();
+    ArrayList<BufferedImage> rightList = new ArrayList<>();
+    ArrayList<BufferedImage> downList = new ArrayList<>();
+
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
-        setDefaultValues();
+        super.setDefaultValues(PlayerAttributes.START_X.getIntValue(), PlayerAttributes.START_Y.getIntValue(),PlayerAttributes.START_SPEED.getIntValue(), PlayerAttributes.START_DIRECTION.getStringValue());
         getPlayerImage();
+
     }
 
-    public void setDefaultValues() {
-
-        //Default x and y values (where the player will initially appear on the screen)
-        x = 100;
-        y = 100;
-
-        //Default speed
-        speed = 3;
-        direction = "resting";
-    }
 
     public void update() { // Update player position
 
@@ -35,73 +32,45 @@ public class Player extends Entity {
 
             if (keyHandler.upPressed && keyHandler.leftPressed) {
                 direction = "up";
-                if (y - speed >= 0) { // Prevent moving above the top border
-                    y -= speed;
-                }
-                if (x - speed >= 0) { // Prevent moving left past the left border
-                    x -= speed;
-                }
+                moveUpBordered();
+                moveLeftBordered();
             }
 
             else if (keyHandler.upPressed && keyHandler.rightPressed) {
                 direction = "up";
-                if (y - speed >= 0) { // Prevent moving above the top border
-                    y -= speed;
-                }
-                if (x + speed + gamePanel.tileSize <= gamePanel.screenWidth) { // Prevent moving right past the right border
-                    x += speed;
-                }
+                moveRightBordered();
+                moveUpBordered();
             }
 
             else if (keyHandler.downPressed && keyHandler.leftPressed) {
                 direction = "down";
-                if (y + speed + gamePanel.tileSize <= gamePanel.screenHeight) { // Prevent moving below the bottom border
-                    y += speed;
-                }
-                if (x - speed >= 0) { // Prevent moving left past the left border
-                    x -= speed;
-                }
+                moveLeftBordered();
+                moveDownBordered();
             }
 
             else if (keyHandler.downPressed && keyHandler.rightPressed) {
                 direction = "down";
-                if (y + speed + gamePanel.tileSize <= gamePanel.screenHeight) { // Prevent moving below the bottom border
-                    y += speed;
-                }
-                if (x + speed + gamePanel.tileSize <= gamePanel.screenWidth) { // Prevent moving right past the right border
-                    x += speed;
-                }
+                moveDownBordered();
+                moveRightBordered();
             }
             else if (keyHandler.upPressed) {
                 direction = "up";
-                if (y - speed >= 0) { // Prevent moving above the top border
-                    y -= speed;
-                }
+                moveUpBordered();
             } else if (keyHandler.downPressed) {
                 direction = "down";
-                if (y + speed + gamePanel.tileSize <= gamePanel.screenHeight) { // Prevent moving below the bottom border
-                    y += speed;
-                }
+                moveDownBordered();
             } else if (keyHandler.leftPressed) {
                 direction = "left";
-                if (x - speed >= 0) { // Prevent moving left past the left border
-                    x -= speed;
-                }
+                moveLeftBordered();
             } else {
                 direction = "right";
-                if (x + speed + gamePanel.tileSize <= gamePanel.screenWidth) { // Prevent moving right past the right border
-                    x += speed;
-                }
+                moveRightBordered();
             }
-            spriteCounter++;
-            if (spriteCounter > 7) {
-                spriteNumber = (spriteNumber + 1) % 9;
-                spriteCounter = 0;
-            }
+            eightFrameSpriteIncrement();
         }
 
         else {
-            spriteNumber = -1;
+            stillSprite();
         }
 
     }
@@ -109,203 +78,90 @@ public class Player extends Entity {
         BufferedImage image = null;
 
 
+        switch (direction) {
+            case "up" -> image = changeSpritePicture(up1, upList);
+            case "right" -> image =changeSpritePicture(right1, rightList);
+            case "left" -> image =changeSpritePicture(left1, leftList);
+            default -> image =changeSpritePicture(down1, downList);
 
-        if (direction.equals("up")) {
 
-            if (spriteNumber == -1) {
-                image = up1;
-            }
-            if (spriteNumber == 0) {
-                image = up6;
-            }
-            else if (spriteNumber == 1) {
-                image = up2;
-
-            }
-
-            else if (spriteNumber == 2) {
-                image = up3;
-            }
-
-            else if (spriteNumber == 3) {
-                image = up4;
-            }
-
-            else if (spriteNumber == 4) {
-                image = up5;
-            }
-
-            else if (spriteNumber == 5) {
-                image = up6;
-            }
-
-            else if (spriteNumber == 6) {
-                image = up7;
-            }
-
-            else if (spriteNumber == 7) {
-                image = up8;
-            }
-
-            else if (spriteNumber == 8) {
-                image = up9;
-            }
         }
-
-        else if (direction.equals("right")) {
-            if (spriteNumber == -1) {
-                image = right1;
-            }
-            else if (spriteNumber == 0) {
-                image = right1;
-
-            }
-            else if (spriteNumber == 1) {
-                image = right2;
-            }
-            else if (spriteNumber == 2) {
-                image = right3;
-            }
-            else if (spriteNumber == 3) {
-                image = right4;
-            }
-            else if (spriteNumber == 4) {
-                image = right5;
-            }
-            else if (spriteNumber == 5) {
-                image = right6;
-            }
-            else if (spriteNumber == 6) {
-                image = right7;
-            }
-            else if (spriteNumber == 7) {
-                image = right8;
-
-            }
-            else if (spriteNumber == 8) {
-                image = right9;
-            }
-        }
-
-        else if (direction.equals("left")) {
-            if (spriteNumber == -1) {
-                image = left1;
-            }
-            else if (spriteNumber == 0) {
-                image = left1;
-
-            }
-
-            else if (spriteNumber == 1) {
-                image = left2;
-            }
-            else if (spriteNumber == 2) {
-                image = left3;
-            }
-            else if (spriteNumber == 3) {
-                image = left4;
-            }
-            else if (spriteNumber == 4) {
-                image = left5;
-            }
-            else if (spriteNumber == 5) {
-                image = left6;
-            }
-            else if (spriteNumber == 6) {
-                image = left7;
-            }
-            else if (spriteNumber == 7) {
-                image = left8;
-            }
-            else if (spriteNumber == 8) {
-                image = left9;
-            }
-        }
-
-        else  {
-            if (spriteNumber == -1) {
-                image = down1;
-            }
-            else if (spriteNumber == 0) {
-                image = down6;
-
-            }
-            else if (spriteNumber == 1) {
-                image = down2;
-
-            }
-
-            else if (spriteNumber == 2) {
-                image = down3;
-            }
-
-            else if (spriteNumber == 3) {
-                image = down4;
-            }
-
-            else if (spriteNumber == 4) {
-                image = down5;
-            }
-
-            else if (spriteNumber == 5) {
-                image = down6;
-            }
-
-            else if (spriteNumber == 6) {
-                image = down7;
-            }
-
-            else if (spriteNumber == 7) {
-                image = down8;
-            }
-
-            else if (spriteNumber == 8) {
-                image = down9;
-            }
-        }
-
-
-        g2.drawImage(image, x, y, gamePanel.tileSize * 2, gamePanel.tileSize * 2, null);
+        g2.drawImage(image, x, y, gamePanel.tileSize * PlayerAttributes.PLAYER_SCALE.getIntValue(), gamePanel.tileSize * PlayerAttributes.PLAYER_SCALE.getIntValue(), null);
     }
-
     public void getPlayerImage() {
         try {
             down1 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown1.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown2.png"));
-            down3 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown3.png"));
-            down4 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown4.png"));
-            down5 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown5.png"));
             down6 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown6.png"));
+            downList.add(down6);
+            down2 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown2.png"));
+            downList.add(down2);
+            down3 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown3.png"));
+            downList.add(down3);
+            down4 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown4.png"));
+            downList.add(down4);
+            down5 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown5.png"));
+            downList.add(down5);
+            downList.add(down6);
             down7 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown7.png"));
+            downList.add(down7);
             down8 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown8.png"));
+            downList.add(down8);
             down9 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown9.png"));
+            downList.add(down9);
             up1 = ImageIO.read(getClass().getResourceAsStream("/player/playerUp1.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/player/playerUp2.png"));
-            up3 = ImageIO.read(getClass().getResourceAsStream("/player/playerUp3.png"));
-            up4 = ImageIO.read(getClass().getResourceAsStream("/player/playerUp4.png"));
-            up5 = ImageIO.read(getClass().getResourceAsStream("/player/playerUp5.png"));
             up6 = ImageIO.read(getClass().getResourceAsStream("/player/playerUp6.png"));
+            upList.add(up6);
+            up2 = ImageIO.read(getClass().getResourceAsStream("/player/playerUp2.png"));
+            upList.add(up2);
+            up3 = ImageIO.read(getClass().getResourceAsStream("/player/playerUp3.png"));
+            upList.add(up3);
+            up4 = ImageIO.read(getClass().getResourceAsStream("/player/playerUp4.png"));
+            upList.add(up4);
+            up5 = ImageIO.read(getClass().getResourceAsStream("/player/playerUp5.png"));
+            upList.add(up5);
+            upList.add(up6);
             up7 = ImageIO.read(getClass().getResourceAsStream("/player/playerUp7.png"));
+            upList.add(up7);
             up8 = ImageIO.read(getClass().getResourceAsStream("/player/playerUp8.png"));
+            upList.add(up8);
             up9 = ImageIO.read(getClass().getResourceAsStream("/player/playerUp9.png"));
+            upList.add(up9);
             left1 = ImageIO.read(getClass().getResourceAsStream("/player/playerLeft1.png"));
+            leftList.add(left1);
             left2 = ImageIO.read(getClass().getResourceAsStream("/player/playerLeft2.png"));
+            leftList.add(left2);
             left3 = ImageIO.read(getClass().getResourceAsStream("/player/playerLeft3.png"));
+            leftList.add(left3);
             left4 = ImageIO.read(getClass().getResourceAsStream("/player/playerLeft4.png"));
+            leftList.add(left4);
             left5 = ImageIO.read(getClass().getResourceAsStream("/player/playerLeft5.png"));
+            leftList.add(left5);
             left6 = ImageIO.read(getClass().getResourceAsStream("/player/playerLeft6.png"));
+            leftList.add(left6);
             left7 = ImageIO.read(getClass().getResourceAsStream("/player/playerLeft7.png"));
+            leftList.add(left7);
             left8 = ImageIO.read(getClass().getResourceAsStream("/player/playerLeft8.png"));
+            leftList.add(left8);
             left9 = ImageIO.read(getClass().getResourceAsStream("/player/playerLeft9.png"));
+            leftList.add(left9);
             right1 = ImageIO.read(getClass().getResourceAsStream("/player/playerRight1.png"));
+            rightList.add(right1);
             right2 = ImageIO.read(getClass().getResourceAsStream("/player/playerRight2.png"));
+            rightList.add(right2);
             right3 = ImageIO.read(getClass().getResourceAsStream("/player/playerRight3.png"));
+            rightList.add(right3);
             right4 = ImageIO.read(getClass().getResourceAsStream("/player/playerRight4.png"));
+            rightList.add(right4);
             right5 = ImageIO.read(getClass().getResourceAsStream("/player/playerRight5.png"));
+            rightList.add(right5);
             right6 = ImageIO.read(getClass().getResourceAsStream("/player/playerRight6.png"));
+            rightList.add(right6);
             right7 = ImageIO.read(getClass().getResourceAsStream("/player/playerRight7.png"));
+            rightList.add(right7);
             right8 = ImageIO.read(getClass().getResourceAsStream("/player/playerRight8.png"));
+            rightList.add(right8);
             right9 = ImageIO.read(getClass().getResourceAsStream("/player/playerRight9.png"));
+            rightList.add(right9);
         } catch (IOException e) {
             e.printStackTrace();
 

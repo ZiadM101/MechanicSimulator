@@ -33,19 +33,26 @@ public class Player extends Entity {
 
     public void update() {
         if (keyHandler.upPressed) {
-            if (y - speed >= 0) { // Prevent moving above the top border
+            if (y - speed >= 0) { // Top Boundary
                 y -= speed;
             }
-        } else if (keyHandler.downPressed) {
-            if (y + speed + gamePanel.tileSize <= gamePanel.screenHeight) { // Prevent moving below the bottom border
+        }
+        if (keyHandler.downPressed) {
+            if (y + speed + gamePanel.tileSize > 900) {
+                y -= speed; // Snap to boundary
+            } else {
                 y += speed;
             }
-        } else if (keyHandler.leftPressed) {
-            if (x - speed >= 0) { // Prevent moving left past the left border
+        }
+        if (keyHandler.leftPressed) {
+            if (x - speed >= 0) { // Left Boundary
                 x -= speed;
             }
-        } else if (keyHandler.rightPressed) {
-            if (x + speed + gamePanel.tileSize <= gamePanel.screenWidth) { // Prevent moving right past the right border
+        }
+        if (keyHandler.rightPressed) {
+            if (x + speed + gamePanel.tileSize > 1460) {
+                x -= speed; // Snap to boundary
+            } else {
                 x += speed;
             }
         }

@@ -1,6 +1,7 @@
 package main;
 
 import entity.Player;
+import tile.MapAttributes;
 import tile.TileManager;
 
 import javax.swing.*;
@@ -24,10 +25,8 @@ public class GamePanel extends JPanel implements Runnable {
     TileManager tilemanager = new TileManager(this);
 
     //World Settings
-    public final int worldMaxCol = 50;
-    public final int worldMaxRow = 50;
-    public final int worldWidth = tileSize * worldMaxCol;
-    public final int worldHeight = tileSize * worldMaxRow;
+    public final int worldWidth = tileSize * MapAttributes.MAX_WORLD_COL.getIntValue();
+    public final int worldHeight = tileSize * MapAttributes.MAX_WORLD_ROW.getIntValue();
 
     public final int FPS = 60;
     //Default Player position
@@ -56,8 +55,12 @@ public class GamePanel extends JPanel implements Runnable {
             player.update();
             positionDisplayCount++;
             if (positionDisplayCount == 59) {
-                System.out.println("PlayerWorld(X,Y): (" + player.worldY + ", " + player.worldX+ ")");
-                System.out.println("PlayerScreenBorder(Top,Right,Bottom,Left): (" + player.getScreenBorderTop() + ", " + player.getScreenBorderRight() + ", " + player.getScreenBorderBottom() + ", " + player.getScreenBorderLeft() + ")");
+                System.out.println("PlayerWorld(X,Y): (" + player.worldX + ", " + player.worldY+ ")");
+                System.out.println("PlayerScreenBorder(Top,Right,Bottom,Left): ("
+                        + player.getScreenBorderTop() + ", "
+                        + player.getScreenBorderRight() + ", "
+                        + player.getScreenBorderBottom() + ", "
+                        + player.getScreenBorderLeft() + ")");
                 positionDisplayCount = 0;
             }
             repaint();

@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Map;
 
 public class TileManager {
     GamePanel gp;
@@ -16,7 +17,7 @@ public class TileManager {
     public TileManager(GamePanel gp) {
         this.gp = gp;
         tile = new Tile[3];// the number of different tiles you could have
-        mapTileNum = new int[gp.worldMaxCol][gp.worldMaxRow];// changing constant at a later date.
+        mapTileNum = new int[MapAttributes.MAX_WORLD_COL.getIntValue()][MapAttributes.MAX_WORLD_ROW.getIntValue()];// changing constant at a later date.
         getTileImage();
         loadMap("/maps/map.txt");
     }
@@ -42,16 +43,16 @@ public class TileManager {
             int col = 0;
             int row = 0;
 
-            while(col < gp.worldMaxCol && row < gp.worldMaxRow){
+            while(col < MapAttributes.MAX_WORLD_COL.getIntValue() && row < MapAttributes.MAX_WORLD_ROW.getIntValue()){
                 String line = br.readLine();
 
-                while(col < gp.worldMaxCol){
+                while(col < MapAttributes.MAX_WORLD_COL.getIntValue()){
                    String[] numbers = line.split(" ");
                    int num = Integer.parseInt(numbers[col]);
                    mapTileNum[row][col] = num;
                    col ++;
                 }
-                if (col == gp.worldMaxCol){
+                if (col == MapAttributes.MAX_WORLD_COL.getIntValue()){
                     col = 0;
                     row ++;
                 }
@@ -65,7 +66,7 @@ public class TileManager {
        int worldCol = 0;
        int worldRow = 0;
 
-       while(worldCol < gp.worldMaxCol && worldRow < gp.worldMaxRow){
+       while(worldCol < MapAttributes.MAX_WORLD_COL.getIntValue() && worldRow < MapAttributes.MAX_WORLD_ROW.getIntValue()){
            int tileNum = mapTileNum[worldRow][worldCol];
 
            int worldX = worldCol * gp.tileSize;
@@ -74,24 +75,25 @@ public class TileManager {
            int screenX;
 
 
-           if (gp.player.getScreenBorderRight() >= 2064 ) {
-               screenX = worldX - (2064 - gp.player.centerScreenX* 2);
+
+           if (gp.player.getScreenBorderRight() >= MapAttributes.RIGHT_BORDER.getIntValue() ) {
+               screenX = worldX - (MapAttributes.RIGHT_BORDER.getIntValue() - gp.player.centerScreenX * 2);
                screenY = worldY - gp.player.worldY + gp.player.screenY;
-               gp.player.screenX = gp.player.worldX - (2064 - gp.player.centerScreenX* 2);;
+               gp.player.screenX = gp.player.worldX - (MapAttributes.RIGHT_BORDER.getIntValue() - gp.player.centerScreenX * 2);;
            }
-           if (gp.player.getScreenBorderLeft() <= 0) {
+           if (gp.player.getScreenBorderLeft() <= MapAttributes.LEFT_BORDER.getIntValue() ) {
                screenX = worldX;
                screenY = worldY - gp.player.worldY + gp.player.screenY;
                gp.player.screenX = gp.player.worldX;
            }
-           if (gp.player.getScreenBorderBottom() >= 2136) {
-               screenY = worldY - (2136 - gp.player.centerScreenY* 2);
+           if (gp.player.getScreenBorderBottom() >= MapAttributes.BOTTOM_BORDER.getIntValue() ) {
+               screenY = worldY - (MapAttributes.BOTTOM_BORDER.getIntValue() - gp.player.centerScreenY * 2);
                screenX = worldX - gp.player.worldX + gp.player.screenX;
-               gp.player.screenY = gp.player.worldY - (2136 - gp.player.centerScreenY* 2);
+               gp.player.screenY = gp.player.worldY - (MapAttributes.BOTTOM_BORDER.getIntValue() - gp.player.centerScreenY* 2);
            }
 
 
-           if (gp.player.getScreenBorderTop() <= 0) {
+           if (gp.player.getScreenBorderTop() <= MapAttributes.TOP_BORDER.getIntValue() ) {
                screenY = worldY;
                screenX = worldX - gp.player.worldX + gp.player.screenX;
                gp.player.screenY = gp.player.worldY;
@@ -106,7 +108,7 @@ public class TileManager {
            worldCol ++;
 
 
-           if (worldCol == 50){
+           if (worldCol == MapAttributes.MAX_WORLD_COL.getIntValue()){
                worldCol = 0;
                worldRow ++;
 

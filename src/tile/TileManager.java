@@ -4,15 +4,19 @@ import main.GamePanel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class TileManager {
     GamePanel gp;
     Tile[] tile;
-
+    int[][] mapTileNum;
     public TileManager(GamePanel gp) {
         this.gp = gp;
         tile = new Tile[3];// the number of different tiles you could have
+        mapTileNum = new int[50][50];// changing constant at a later date.
         getTileImage();
     }
 
@@ -21,10 +25,38 @@ public class TileManager {
             tile[0] = new Tile();
             tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tile/wallTile.png"));
             tile[1] = new Tile();
-            tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tile/grasstile.png"));
+            tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tile/grassTile.png"));
+            tile[2] = new Tile();
+            tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tile/concreteTtile.png"));
             // when adding new tiles copy the two lines above
         }catch(IOException e){
             e.printStackTrace();
+        }
+    }
+    public void loadMap(){
+        try {
+            InputStream is = getClass().getResourceAsStream("/maps/map.txt");
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
+            int col = 0;
+            int row = 0;
+
+            while(col < 50 && row < 50){
+                String line = br.readLine();
+
+                while(col < 50){
+                   String[] numbers = line.split(" ");
+                   int num = Integer.parseInt(numbers[col]);
+                   mapTileNum[row][col] = num;
+                   col ++;
+                }
+                if (col == 50){
+                    col = 0;
+                    row ++;
+                }
+            }
+        }
+        catch (Exception e){
         }
     }
 

@@ -9,22 +9,23 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Player extends Entity  {
+public class Player extends Entity {
+
+    GamePanel gamePanel;
     KeyHandler keyHandler;
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
-        super.setDefaultValues(PlayerAttributes.START_X.getIntValue(), PlayerAttributes.START_Y.getIntValue(),PlayerAttributes.START_SPEED.getIntValue(), PlayerAttributes.START_DIRECTION.getStringValue());
+        super.setDefaultValues();
         getPlayerImage();
-
     }
+
 
 
     public void update() { // Update player position
 
         if (keyHandler.downPressed || keyHandler.leftPressed || keyHandler.rightPressed || keyHandler.upPressed) {
-
             if (keyHandler.upPressed && keyHandler.leftPressed) {
                 direction = "up";
                 tempSpeed = speed;
@@ -33,7 +34,6 @@ public class Player extends Entity  {
                 moveLeftBordered();
                 speed = tempSpeed;
             }
-
             else if (keyHandler.upPressed && keyHandler.rightPressed) {
                 direction = "up";
                 tempSpeed = speed;
@@ -79,7 +79,6 @@ public class Player extends Entity  {
         else {
             stillSprite();
         }
-
     }
     public void draw(Graphics2D  g2) {
         BufferedImage image = null;
@@ -95,6 +94,7 @@ public class Player extends Entity  {
         }
         g2.drawImage(image, x, y, gamePanel.tileSize * PlayerAttributes.PLAYER_SCALE.getIntValue(), gamePanel.tileSize * PlayerAttributes.PLAYER_SCALE.getIntValue(), null);
     }
+
     public void getPlayerImage() {
         try {
             down1 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown1.png"));

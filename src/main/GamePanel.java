@@ -20,10 +20,14 @@ public class GamePanel extends JPanel implements Runnable {
     //Create key handler, thread, and player objects
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread;
-    Player player = new Player(this, keyHandler);
+    public Player player = new Player(this, keyHandler);
     TileManager tilemanager = new TileManager(this);
 
-    //FPS
+    //World map
+    public final int maxWorldCol = 50;
+    public final int maxWorldRow = 50;
+    public final int worldWidth = tileSize * maxWorldCol;
+    public final int worldHeight = tileSize * maxWorldRow;
 
 
     public final int FPS = 60;

@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Entity {
-    public int x, y;
+    public int worldX, worldY;
     public int speed, tempSpeed;
     ArrayList<BufferedImage> upList = new ArrayList<>();
     ArrayList<BufferedImage> leftList = new ArrayList<>();
@@ -28,33 +28,33 @@ public class Entity {
     public void setDefaultValues(int x, int y, int speed, String direction) {
 
         //Default values (where the player will initially appear on the screen)
-        this.x = x;
-        this.y = y;
+        this.worldX = x;
+        this.worldY = y;
         this.speed = speed;
         this.direction = direction;
     }
 
     public void moveLeftBordered() {
         //if (x - speed >= 0) { // Prevent moving left past the left border
-            x -= speed;
+        worldX -= speed;
         //}
     }
 
     public void moveRightBordered() {
         //if (x + speed + gamePanel.tileSize <= gamePanel.screenWidth) { // Prevent moving right past the right border
-            x += speed;
+        worldX += speed;
         //}
     }
 
     public void moveUpBordered() {
         //if (y - speed >= 0) { // Prevent moving above the top border
-            y -= speed;
+        worldY -= speed;
        // }
     }
 
     public void moveDownBordered() {
         //if (y + speed + gamePanel.tileSize <= gamePanel.screenHeight) { // Prevent moving below the bottom border
-            y += speed;
+        worldY += speed;
         //}
     }
 

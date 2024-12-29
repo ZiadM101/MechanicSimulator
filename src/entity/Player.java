@@ -20,7 +20,7 @@ public class Player extends Entity {
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
-        super.setDefaultValues(PlayerAttributes.START_X.getIntValue(), PlayerAttributes.START_Y.getIntValue(),PlayerAttributes.START_SPEED.getIntValue(), PlayerAttributes.START_DIRECTION.getStringValue());
+        super.setDefaultValues(PlayerAttributes.START_X.getIntValue(), PlayerAttributes.START_Y.getIntValue(), PlayerAttributes.START_SPEED.getIntValue(), PlayerAttributes.START_DIRECTION.getStringValue());
         getPlayerImage();
         screenX = (gamePanel.tileSize * 30) / 2 ;
         screenY = (gamePanel.tileSize * 14) / 2;

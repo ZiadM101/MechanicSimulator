@@ -1,11 +1,13 @@
 package entity;
 
 public enum PlayerAttributes {
-    START_SPEED(4),
-    START_X(100),
-    START_Y(100),
+    START_SPEED(4), // as of now must be a multiple of 4  (will fix later)
+    START_X(1000),
+    START_Y(1000),
     START_DIRECTION("down"),
-    PLAYER_SCALE(2);
+    PLAYER_SCALE(2),
+    SCREEN_X_CENTER(600),
+    SCREEN_Y_CENTER(264);
 
     private final Integer intValue;
     private final String stringValue;

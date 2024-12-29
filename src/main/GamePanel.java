@@ -51,11 +51,15 @@ public class GamePanel extends JPanel implements Runnable {
 
         double drawInterval = 1000000000.0f / FPS;
         double nextDrawTime = System.nanoTime() + drawInterval;
-
+        int positionDisplayCount = 0;
         while(gameThread.isAlive()) {
             player.update();
-
-
+            positionDisplayCount++;
+            if (positionDisplayCount == 59) {
+                System.out.println("PlayerWorld(X,Y): (" + player.worldY + ", " + player.worldX+ ")");
+                System.out.println("PlayerScreenBorder(Top,Right,Bottom,Left): (" + player.getScreenBorderTop() + ", " + player.getScreenBorderRight() + ", " + player.getScreenBorderBottom() + ", " + player.getScreenBorderLeft() + ")");
+                positionDisplayCount = 0;
+            }
             repaint();
 
             try {

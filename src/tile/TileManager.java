@@ -70,8 +70,37 @@ public class TileManager {
 
            int worldX = worldCol * gp.tileSize;
            int worldY = worldRow * gp.tileSize;
-           int screenX = worldX - gp.player.worldX + gp.player.screenX;
-           int screenY = worldY - gp.player.worldY + gp.player.screenY;
+           int screenY;
+           int screenX;
+
+
+           if (gp.player.getScreenBorderRight() >= 2064 ) {
+               screenX = worldX - (2064 - gp.player.centerScreenX* 2);
+               screenY = worldY - gp.player.worldY + gp.player.screenY;
+               gp.player.screenX = gp.player.worldX - (2064 - gp.player.centerScreenX* 2);;
+           }
+           if (gp.player.getScreenBorderLeft() <= 0) {
+               screenX = worldX;
+               screenY = worldY - gp.player.worldY + gp.player.screenY;
+               gp.player.screenX = gp.player.worldX;
+           }
+           if (gp.player.getScreenBorderBottom() >= 2136) {
+               screenY = worldY - (2136 - gp.player.centerScreenY* 2);
+               screenX = worldX - gp.player.worldX + gp.player.screenX;
+               gp.player.screenY = gp.player.worldY - (2136 - gp.player.centerScreenY* 2);
+           }
+
+
+           if (gp.player.getScreenBorderTop() <= 0) {
+               screenY = worldY;
+               screenX = worldX - gp.player.worldX + gp.player.screenX;
+               gp.player.screenY = gp.player.worldY;
+           }
+
+           else {
+               screenX = worldX - gp.player.worldX + gp.player.screenX;
+               screenY = worldY - gp.player.worldY + gp.player.screenY;
+           }
 
            g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
            worldCol ++;

@@ -13,7 +13,7 @@ public class Entity {
     ArrayList<BufferedImage> rightList = new ArrayList<>();
     ArrayList<BufferedImage> downList = new ArrayList<>();
     public BufferedImage down1, down2, down3, down4, down5, down6, down7, down8, down9;
-
+    public int screenBorderTop, screenBorderLeft, screenBorderRight, screenBorderBottom;
     public BufferedImage up1, up2, up3, up4, up5, up6, up7, up8, up9;
 
     public BufferedImage left1, left2, left3, left4, left5, left6, left7, left8, left9;

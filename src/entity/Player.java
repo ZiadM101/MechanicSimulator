@@ -11,11 +11,6 @@ import java.util.ArrayList;
 
 public class Player extends Entity  {
     KeyHandler keyHandler;
-    ArrayList<BufferedImage> upList = new ArrayList<>();
-    ArrayList<BufferedImage> leftList = new ArrayList<>();
-    ArrayList<BufferedImage> rightList = new ArrayList<>();
-    ArrayList<BufferedImage> downList = new ArrayList<>();
-
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
@@ -103,7 +98,6 @@ public class Player extends Entity  {
     public void getPlayerImage() {
         try {
             down1 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown1.png"));
-
             down2 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown2.png"));
             downList.add(down2);
             down3 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown3.png"));
@@ -114,7 +108,6 @@ public class Player extends Entity  {
             downList.add(down5);
             down6 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown6.png"));
             downList.add(down6);
-
             down7 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown7.png"));
             downList.add(down7);
             down8 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown8.png"));
@@ -122,7 +115,6 @@ public class Player extends Entity  {
             down9 = ImageIO.read(getClass().getResourceAsStream("/player/playerDown9.png"));
             downList.add(down9);
             up1 = ImageIO.read(getClass().getResourceAsStream("/player/playerUp1.png"));
-
             up2 = ImageIO.read(getClass().getResourceAsStream("/player/playerUp2.png"));
             upList.add(up2);
             up3 = ImageIO.read(getClass().getResourceAsStream("/player/playerUp3.png"));

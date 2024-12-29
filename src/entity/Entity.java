@@ -8,6 +8,10 @@ import java.util.ArrayList;
 public class Entity {
     public int x, y;
     public int speed, tempSpeed;
+    ArrayList<BufferedImage> upList = new ArrayList<>();
+    ArrayList<BufferedImage> leftList = new ArrayList<>();
+    ArrayList<BufferedImage> rightList = new ArrayList<>();
+    ArrayList<BufferedImage> downList = new ArrayList<>();
     public BufferedImage down1, down2, down3, down4, down5, down6, down7, down8, down9;
 
     public BufferedImage up1, up2, up3, up4, up5, up6, up7, up8, up9;

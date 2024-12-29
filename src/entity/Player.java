@@ -21,8 +21,8 @@ public class Player extends Entity {
         this.keyHandler = keyHandler;
         super.setDefaultValues(PlayerAttributes.START_X.getIntValue(), PlayerAttributes.START_Y.getIntValue(),PlayerAttributes.START_SPEED.getIntValue(), PlayerAttributes.START_DIRECTION.getStringValue());
         getPlayerImage();
-        centerScreenX = ((gamePanel.tileSize * 26) / 2) - (gamePanel.tileSize / 2);
-        centerScreenY = ((gamePanel.tileSize * 12) / 2) - (gamePanel.tileSize / 2);
+        centerScreenX = ((gamePanel.tileSize * 28) / 2) - (gamePanel.tileSize / 2);
+        centerScreenY = ((gamePanel.tileSize * 10) / 2) - (gamePanel.tileSize / 2);
         screenX = centerScreenX;
         screenY = centerScreenY;
 

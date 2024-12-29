@@ -5,9 +5,9 @@ public enum MapAttributes {
     MAX_WORLD_COL(50),
     MAX_WORLD_ROW(50),
     TOP_BORDER(0),
-    BOTTOM_BORDER(1920),
+    BOTTOM_BORDER(960),
     LEFT_BORDER(0),
-    RIGHT_BORDER(1920);
+    RIGHT_BORDER(1680);
 
 
     private final Integer intValue;

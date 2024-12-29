@@ -17,7 +17,7 @@ public class Player extends Entity {
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
-        super.setDefaultValues();
+        super.setDefaultValues(PlayerAttributes.START_X.getIntValue(), PlayerAttributes.START_Y.getIntValue(),PlayerAttributes.START_SPEED.getIntValue(), PlayerAttributes.START_DIRECTION.getStringValue());
         getPlayerImage();
     }
 
@@ -71,7 +71,8 @@ public class Player extends Entity {
                 moveLeftBordered();
             } else {
                 direction = "right";
-                moveRightBordered();
+                super.moveRightBordered();
+
             }
             eightFrameSpriteIncrement();
         }

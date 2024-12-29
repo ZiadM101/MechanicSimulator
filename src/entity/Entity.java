@@ -35,27 +35,27 @@ public class Entity {
     }
 
     public void moveLeftBordered() {
-        if (x - speed >= 0) { // Prevent moving left past the left border
+        //if (x - speed >= 0) { // Prevent moving left past the left border
             x -= speed;
-        }
+        //}
     }
 
     public void moveRightBordered() {
-        if (x + speed + gamePanel.tileSize <= gamePanel.screenWidth) { // Prevent moving right past the right border
+        //if (x + speed + gamePanel.tileSize <= gamePanel.screenWidth) { // Prevent moving right past the right border
             x += speed;
-        }
+        //}
     }
 
     public void moveUpBordered() {
-        if (y - speed >= 0) { // Prevent moving above the top border
+        //if (y - speed >= 0) { // Prevent moving above the top border
             y -= speed;
-        }
+       // }
     }
 
     public void moveDownBordered() {
-        if (y + speed + gamePanel.tileSize <= gamePanel.screenHeight) { // Prevent moving below the bottom border
+        //if (y + speed + gamePanel.tileSize <= gamePanel.screenHeight) { // Prevent moving below the bottom border
             y += speed;
-        }
+        //}
     }
 
     public void eightFrameSpriteIncrement() {

@@ -1,4 +1,4 @@
-package layout;
+package tile;
 
 import main.GamePanel;
 
@@ -19,9 +19,9 @@ public class TileManager {
     public void getTileImage(){
         try{
             tile[0] = new Tile();
-            tile[0].image = ImageIO.read(getClass().getResourceAsStream("/gamelayout/wallTile.png"));
+            tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tile/wallTile.png"));
             tile[1] = new Tile();
-            tile[1].image = ImageIO.read(getClass().getResourceAsStream("/gamelayout/grasstile.png"));
+            tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tile/grasstile.png"));
             // when adding new tiles copy the two lines above
         }catch(IOException e){
             e.printStackTrace();

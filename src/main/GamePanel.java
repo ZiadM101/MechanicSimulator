@@ -1,7 +1,7 @@
 package main;
 
 import entity.Player;
-import layout.TileManager;
+import tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;

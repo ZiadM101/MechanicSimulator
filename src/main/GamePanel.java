@@ -16,7 +16,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final float maxScreenRow = 22.5f; // 12 rows of tiles
     public final int screenWidth = (int) tileSize * maxScreenCol; // How many columns of pixels = 768
     public final int screenHeight = (int) (tileSize * maxScreenRow); // How many rows of pixels = 576
-
+    public int screenWidth2;
+    public int screenHeight2;
 
     //Create key handler, thread, and player objects
     KeyHandler keyHandler = new KeyHandler();
@@ -32,12 +33,24 @@ public class GamePanel extends JPanel implements Runnable {
 
 
     public GamePanel() {
-
-        setPreferredSize(new Dimension(screenWidth, screenHeight));
+        setFullScreen();
+        setPreferredSize(new Dimension(screenWidth2, screenHeight2));
         setBackground(Color.BLACK);
         setDoubleBuffered(true);
         addKeyListener(keyHandler);
         setFocusable(true);
+    }
+
+    public void setFullScreen() {
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice gd = ge.getDefaultScreenDevice();
+        gd.setFullScreenWindow(Main.gameWindow);
+
+
+        //get screen height
+        screenWidth2 = Main.gameWindow.getWidth();
+        screenHeight2 = Main.gameWindow.getHeight();
+
     }
 
     public void startGameThread() {

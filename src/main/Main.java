@@ -1,10 +1,13 @@
 package main;//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 public class Main {
+
+    public static GameWindow gameWindow;
+
     public static void main(String[] args) {
-        GameWindow gameWindow = new GameWindow();
+        gameWindow = new GameWindow();
         GamePanel gamePanel = new GamePanel();
         gameWindow.add(gamePanel);
         //Hello

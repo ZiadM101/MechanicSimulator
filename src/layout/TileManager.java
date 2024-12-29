@@ -36,8 +36,8 @@ public class TileManager {
         drawHorizontalLine(g2, tile[0].image, 448, 228, -12, gp.tileSize); // Left side
         drawHorizontalLine(g2, tile[0].image, 800, 228, 16, gp.tileSize); // Right side
 
-        drawHorizontalLine(g2,tile[0].image,0,60,32,gp.tileSize);
-        drawVerticalLine(g2,tile[1].image,560,0,17,gp.tileSize);
+        drawHorizontalLine(g2,tile[0].image,0,60,30,gp.tileSize);
+        drawVerticalLine(g2,tile[1].image,560,0,15,gp.tileSize);
 
         // Vertical lines of grass Left side
         for (int i = 400; i >= 0; i-=50) {

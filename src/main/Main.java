@@ -4,10 +4,9 @@ import javax.swing.*;
 
 public class Main {
 
-    public static GameWindow gameWindow;
 
     public static void main(String[] args) {
-        gameWindow = new GameWindow();
+        GameWindow gameWindow = new GameWindow();
         GamePanel gamePanel = new GamePanel();
         gameWindow.add(gamePanel);
         //Hello

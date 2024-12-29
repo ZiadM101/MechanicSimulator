@@ -33,8 +33,8 @@ public class GamePanel extends JPanel implements Runnable {
 
 
     public GamePanel() {
-        setFullScreen();
-        setPreferredSize(new Dimension(screenWidth2, screenHeight2));
+
+        setPreferredSize(new Dimension(screenWidth, screenHeight));
         setBackground(Color.BLACK);
         setDoubleBuffered(true);
         addKeyListener(keyHandler);
@@ -44,12 +44,12 @@ public class GamePanel extends JPanel implements Runnable {
     public void setFullScreen() {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice gd = ge.getDefaultScreenDevice();
-        gd.setFullScreenWindow(Main.gameWindow);
+        //gd.setFullScreenWindow(Main.gameWindow);
 
 
         //get screen height
-        screenWidth2 = Main.gameWindow.getWidth();
-        screenHeight2 = Main.gameWindow.getHeight();
+        //screenWidth2 = Main.gameWindow.getWidth();
+        //screenHeight2 = Main.gameWindow.getHeight();
 
     }
 

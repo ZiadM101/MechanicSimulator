@@ -13,12 +13,15 @@ public class Player extends Entity {
 
     GamePanel gamePanel;
     KeyHandler keyHandler;
-
+    public final int screenX;
+    public final int screenY;
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
         super.setDefaultValues(PlayerAttributes.START_X.getIntValue(), PlayerAttributes.START_Y.getIntValue(),PlayerAttributes.START_SPEED.getIntValue(), PlayerAttributes.START_DIRECTION.getStringValue());
         getPlayerImage();
+        screenX = ((gamePanel.tileSize * 26) / 2) - (gamePanel.tileSize / 2);
+        screenY = ((gamePanel.tileSize * 12) / 2) - (gamePanel.tileSize / 2);
     }
 
 
@@ -93,7 +96,7 @@ public class Player extends Entity {
 
 
         }
-        g2.drawImage(image, x, y, gamePanel.tileSize * PlayerAttributes.PLAYER_SCALE.getIntValue(), gamePanel.tileSize * PlayerAttributes.PLAYER_SCALE.getIntValue(), null);
+        g2.drawImage(image, screenX, screenY, gamePanel.tileSize * PlayerAttributes.PLAYER_SCALE.getIntValue(), gamePanel.tileSize * PlayerAttributes.PLAYER_SCALE.getIntValue(), null);
     }
 
     public void getPlayerImage() {

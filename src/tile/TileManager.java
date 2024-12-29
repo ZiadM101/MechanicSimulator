@@ -18,6 +18,7 @@ public class TileManager {
         tile = new Tile[3];// the number of different tiles you could have
         mapTileNum = new int[50][50];// changing constant at a later date.
         getTileImage();
+        loadMap("/maps/map.txt");
     }
 
     public void getTileImage(){
@@ -33,9 +34,9 @@ public class TileManager {
             e.printStackTrace();
         }
     }
-    public void loadMap(){
+    public void loadMap(String filePath ){
         try {
-            InputStream is = getClass().getResourceAsStream("/maps/map.txt");
+            InputStream is = getClass().getResourceAsStream(filePath);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
             int col = 0;
@@ -61,35 +62,23 @@ public class TileManager {
     }
 
     public void draw(Graphics2D g2){
-        // Vertical lines of stone
-        drawVerticalLine(g2, tile[0].image, 448, 278, 5, gp.tileSize);
-        drawVerticalLine(g2, tile[0].image, 800, 278, 5, gp.tileSize);
-        // Horizontal lines of stone
-        drawHorizontalLine(g2, tile[0].image, 448, 228, -12, gp.tileSize); // Left side
-        drawHorizontalLine(g2, tile[0].image, 800, 228, 16, gp.tileSize); // Right side
+       int col = 0;
+       int row = 0;
+       int x = 0;
+       int y = 0;
+       while(col < 50 && row < 50){
+           int tileNum = mapTileNum[row][col];
+           g2.drawImage(tile[tileNum].image, x, y, gp.tileSize, gp.tileSize, null);
+           col ++;
+           x += gp.tileSize;
 
-        // Vertical lines of grass Left side
-        for (int i = 400; i >= 0; i-=50) {
-            drawVerticalLine(g2, tile[1].image, i, 278, 5, gp.tileSize);
-        }
-        // Vertical lines of grass right side
-        for (int i = 1500; i >= 850; i-=50) {
-            drawVerticalLine(g2, tile[1].image, i, 278, 5, gp.tileSize);
-        }
-    }
+           if (col == 50){
+               col = 0;
+               x = 0;
+               row ++;
+               y += gp.tileSize;
+           }
+       }
 
-    // Helper method for vertical lines
-    private void drawVerticalLine(Graphics2D g2, Image image, int x, int startY, int count, int tileSize) {
-        for (int i = 0; i < count; i++) {
-            g2.drawImage(image, x, startY + (i * tileSize), tileSize, tileSize, null);
-        }
-    }
-
-// Helper method for horizontal lines
-    private void drawHorizontalLine(Graphics2D g2, Image image, int startX, int y, int count, int tileSize) {
-        for (int i = 0; i < Math.abs(count); i++) {
-            int x = startX + (i * tileSize * (count > 0 ? 1 : -1));
-            g2.drawImage(image, x, y, tileSize, tileSize, null);
-        }
     }
 }

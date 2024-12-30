@@ -25,6 +25,12 @@ public class Player extends Entity {
         centerScreenY = ((gamePanel.tileSize * 12) / 2) - (gamePanel.tileSize / 2);
         screenX = centerScreenX;
         screenY = centerScreenY;
+        solidArea = new Rectangle();
+        solidArea.x = 8;
+        solidArea.y = 8;
+        solidArea.width = 32;
+        solidArea.height = 32;
+        solidArea = new Rectangle(0, 0, gamePanel.tileSize - 8, gamePanel.tileSize - 8);
 
     }
 
@@ -49,56 +55,77 @@ public class Player extends Entity {
 
         if (keyHandler.downPressed || keyHandler.leftPressed || keyHandler.rightPressed || keyHandler.upPressed) {
             if (keyHandler.upPressed && keyHandler.leftPressed) {
-                direction = "up";
-                tempSpeed = speed;
-                speed = (int) (speed * 0.75);
-                moveUpBordered();
-                moveLeftBordered();
-                speed = tempSpeed;
+                direction = "upLeft";
             }
             else if (keyHandler.upPressed && keyHandler.rightPressed) {
-                direction = "up";
-                tempSpeed = speed;
-                speed = (int) (speed * 0.75);
-                moveRightBordered();
-                moveUpBordered();
-                speed = tempSpeed;
+                direction = "upRight";
             }
 
             else if (keyHandler.downPressed && keyHandler.leftPressed) {
-                direction = "down";
-                tempSpeed = speed;
-                speed = (int) (speed * 0.75);
-                moveLeftBordered();
-                moveDownBordered();
-                speed = tempSpeed;
+                direction = "downLeft";
             }
-
             else if (keyHandler.downPressed && keyHandler.rightPressed) {
-                direction = "down";
-                tempSpeed = speed;
-                speed = (int) (speed * 0.75);
-                moveDownBordered();
-                moveRightBordered();
-                speed = tempSpeed;
+                direction = "downRight";
             }
             else if (keyHandler.upPressed) {
                 direction = "up";
-                moveUpBordered();
             } else if (keyHandler.downPressed) {
                 direction = "down";
-                moveDownBordered();
             } else if (keyHandler.leftPressed) {
                 direction = "left";
-                moveLeftBordered();
             } else {
                 direction = "right";
-                super.moveRightBordered();
-
             }
             eightFrameSpriteIncrement();
         }
 
+        collisionOn = false;
+        gamePanel.checker.checkTile(this);
+
+        if(!collisionOn){
+            switch (direction) {
+                case "upLeft":
+                    tempSpeed = speed;
+                    speed = (int) (speed * 0.75);
+                    moveUpBordered();
+                    moveLeftBordered();
+                    speed = tempSpeed;
+                    break;
+                case "upRight":
+                    tempSpeed = speed;
+                    speed = (int) (speed * 0.75);
+                    moveRightBordered();
+                    moveUpBordered();
+                    speed = tempSpeed;
+                    break;
+                case "downLeft":
+                    tempSpeed = speed;
+                    speed = (int) (speed * 0.75);
+                    moveLeftBordered();
+                    moveDownBordered();
+                    speed = tempSpeed;
+                    break;
+                case "downRight":
+                    tempSpeed = speed;
+                    speed = (int) (speed * 0.75);
+                    moveDownBordered();
+                    moveRightBordered();
+                    speed = tempSpeed;
+                    break;
+                case "up":
+                    moveUpBordered();
+                    break;
+                case "down":
+                    moveDownBordered();
+                    break;
+                case "left":
+                    moveLeftBordered();
+                    break;
+                case "right":
+                    super.moveRightBordered();
+                    break;
+            }
+        }
         else {
             stillSprite();
         }

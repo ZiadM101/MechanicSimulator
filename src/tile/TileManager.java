@@ -12,8 +12,8 @@ import java.util.Map;
 
 public class TileManager {
     GamePanel gp;
-    Tile[] tile;
-    int[][] mapTileNum;
+    public Tile[] tile;
+    public int[][] mapTileNum;
     public TileManager(GamePanel gp) {
         this.gp = gp;
         tile = new Tile[3];// the number of different tiles you could have
@@ -26,10 +26,13 @@ public class TileManager {
         try{
             tile[0] = new Tile();
             tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tile/wallTile.png"));
+            tile[0].collision = true;
             tile[1] = new Tile();
             tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tile/grassTile.png"));
+            tile[1].collision = false;
             tile[2] = new Tile();
             tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tile/concreteTile.png"));
+            tile[2].collision = false;
             // when adding new tiles copy the two lines above
         }catch(IOException e){
             e.printStackTrace();
@@ -63,7 +66,7 @@ public class TileManager {
     }
 
     public void draw(Graphics2D g2){
-       int worldCol = 0;
+       int worldCol  = 0;
        int worldRow = 0;
 
        while(worldCol < MapAttributes.MAX_WORLD_COL.getIntValue() && worldRow < MapAttributes.MAX_WORLD_ROW.getIntValue()){

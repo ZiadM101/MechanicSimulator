@@ -27,10 +27,10 @@ public class Player extends Entity {
         screenY = centerScreenY;
         solidArea = new Rectangle();
         solidArea.x = 8;
-        solidArea.y = 8;
+        solidArea.y = 16;
         solidArea.width = 32;
         solidArea.height = 32;
-        solidArea = new Rectangle(0, 0, gamePanel.tileSize - 8, gamePanel.tileSize - 8);
+        solidArea = new Rectangle(0, 0, gamePanel.tileSize, gamePanel.tileSize);
 
     }
 
@@ -76,65 +76,69 @@ public class Player extends Entity {
             } else {
                 direction = "right";
             }
-            eightFrameSpriteIncrement();
-        }
+            collisionOn = false;
+            gamePanel.checker.checkTile(this);
 
-        collisionOn = false;
-        gamePanel.checker.checkTile(this);
-
-        if(!collisionOn){
-            switch (direction) {
-                case "upLeft":
-                    tempSpeed = speed;
-                    speed = (int) (speed * 0.75);
-                    moveUpBordered();
-                    moveLeftBordered();
-                    speed = tempSpeed;
-                    break;
-                case "upRight":
-                    tempSpeed = speed;
-                    speed = (int) (speed * 0.75);
-                    moveRightBordered();
-                    moveUpBordered();
-                    speed = tempSpeed;
-                    break;
-                case "downLeft":
-                    tempSpeed = speed;
-                    speed = (int) (speed * 0.75);
-                    moveLeftBordered();
-                    moveDownBordered();
-                    speed = tempSpeed;
-                    break;
-                case "downRight":
-                    tempSpeed = speed;
-                    speed = (int) (speed * 0.75);
-                    moveDownBordered();
-                    moveRightBordered();
-                    speed = tempSpeed;
-                    break;
-                case "up":
-                    moveUpBordered();
-                    break;
-                case "down":
-                    moveDownBordered();
-                    break;
-                case "left":
-                    moveLeftBordered();
-                    break;
-                case "right":
-                    super.moveRightBordered();
-                    break;
+            if(!collisionOn){
+                switch (direction) {
+                    case "upLeft":
+                        tempSpeed = speed;
+                        speed = (int) (speed * 0.75);
+                        moveUpBordered();
+                        moveLeftBordered();
+                        speed = tempSpeed;
+                        break;
+                    case "upRight":
+                        tempSpeed = speed;
+                        speed = (int) (speed * 0.75);
+                        moveRightBordered();
+                        moveUpBordered();
+                        speed = tempSpeed;
+                        break;
+                    case "downLeft":
+                        tempSpeed = speed;
+                        speed = (int) (speed * 0.75);
+                        moveLeftBordered();
+                        moveDownBordered();
+                        speed = tempSpeed;
+                        break;
+                    case "downRight":
+                        tempSpeed = speed;
+                        speed = (int) (speed * 0.75);
+                        moveDownBordered();
+                        moveRightBordered();
+                        speed = tempSpeed;
+                        break;
+                    case "up":
+                        moveUpBordered();
+                        break;
+                    case "down":
+                        moveDownBordered();
+                        break;
+                    case "left":
+                        moveLeftBordered();
+                        break;
+                    case "right":
+                        super.moveRightBordered();
+                        break;
+                }
             }
+            eightFrameSpriteIncrement();
         }
         else {
             stillSprite();
         }
+
     }
     public void draw(Graphics2D  g2) {
         BufferedImage image = null;
 
 
         switch (direction) {
+            case "upLeft" -> image = changeSpritePicture(up1, upList);
+            case "upRight" -> image = changeSpritePicture(up1, upList);
+            case "downLeft" -> image = changeSpritePicture(down1, downList);
+            case "downRight" -> image = changeSpritePicture(down1, downList);
             case "up" -> image = changeSpritePicture(up1, upList);
             case "right" -> image =changeSpritePicture(right1, rightList);
             case "left" -> image =changeSpritePicture(left1, leftList);
